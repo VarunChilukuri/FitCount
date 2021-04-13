@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <!--https://coolors.co/ffbe0b-fb5607-ff006e-8338ec-3a86ff-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../static/dashboard.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/e397881447.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Activity #{{id}}</title>
+</head>
+
+<body>
+    <nav class="mt-2 navbar navbar-fixed-top navbar-dark">
+        <a class="navbar-brand font-weight-bolder" href="#">
+            <img src="../static/logo.PNG" width="50"
+                height="50" class="align-center mb-1 font-weight-bolder h2" alt="">
+            FITCOUNT
+        </a>
+
+        <img src={{ profile_medium }} width="30" height="30"
+        class="mr-1 mt-2 rounded-circle ml-auto text-dark font-weight-bolder h2" alt="">
+    <div class="dropdown pr-2 ml-n2">
+        <a class="btn dropdown-toggle" data-toggle="dropdown">
+            {{name}}
+        </a>
+        <ul class="dropdown-menu">
+            <a class="dropdown-item" href="/dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
+            <a class="dropdown-item" href="/activities/all"><i class="fas fa-list-ul"></i> Activities</a>
+            <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+        </ul>
+    </div>
+    </nav>
+
+    <div>
+        <div class="container">
+            <h3 id="title" class="mb-4 ml-2">Activity #{{id}}</h3>
+            <div class="row mb-5">
+                <div class="col-md-12 mb-2 mb-md-0">
+                    <div class="box5 text-center">
+                        <h1 class="text-center pb-3 pt-5">{{activity["name"]}}</h1>
+                        {% if activity["type"] == "Ride" %}
+                        <i class="pb-4 fas fa-biking fa-3x"></i>
+                        {% elif activity["type"] == "Run" %}
+                        <i class="pb-4 fas fa-running fa-3x"></i>
+                        {% elif activity["type"] == "Swim" %}
+                        <i class="pb-4 fas fa-swimmer fa-3x fa-flip-horizontal"></i>
+                        {% elif activity["type"] == "Walk" %}
+                        <i class="pb-4 fas fa-walking fa-3x"></i>
+                        {% elif activity["type"] == "Hike" %}
+                        <i class="pb-4 fas fa-hiking fa-3x"></i>
+                        {% elif activity["type"] == "IceSkate" %}
+                        <i class="pb-4 fas fa-skating fa-3x"></i>
+                        {% elif activity["type"] == "NordicSki" %}
+                        <i class="pb-4 fas fa-skiing-nordic fa-3x"></i>
+                        {% elif activity["type"] == "Snowboard" %}
+                        <i class="pb-4 fas fa-snowboarding fa-3x"></i>
+                        {% elif activity["type"] == "Wheelchair" %}
+                        <i class="pb-4 fas fa-wheelchair fa-3x"></i>
+                        {% elif activity["type"] == "Yoga" %}
+                        <i class="pb-4 fas fa-child fa-3x"></i>>
+                        {% elif activity["type"] == "AlpineSki" %}
+                        <i class="pb-4 fas fa-skiing fa-3x"></i>
+                        {% elif activity["type"] == "BackcountrySki" %}
+                        <i class="pb-4 fas fa-skiing fa-3x"></i>
+                        {% elif activity["type"] == "Soccer" %}
+                        <i class="pb-4 fas fa-futbol fa-3x"></i>
+                        {% elif activity["type"] == "Workout" %}
+                        <i class="pb-4 fas fa-heartbeat fa-3x"></i>
+                        {% else %}
+                        {{ activity["type"] }}
+                        {% endif %}
+                        <div class="row mt-4 px-4">
+                            <img class="mx-auto img-fluid rounded" id="map" src="{{url_for('static', filename=image)}}">
+                        </div>
+                        <div class="row mt-5 mb-md-5 px-5">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-4 mb-4 mb-md-0">
+                                <p class="h4"><b>Date:</b> {{"{}/{}/{}".format(date[5:7],
+                                    date[8:10],
+                                    date[2:4])}}</p>
+                            </div>
+                            <div class="col-md-4">
+                                {% if activity["moving_time"] >= 3600 %}
+                                <p class="h4"><b>Time:</b> {{ "%d:%02d:%02d" % (activity["moving_time"]//3600,
+                                    (activity["moving_time"]%3600)//60,
+                                    (activity["moving_time"]%3600)%60) }}</p>
+                                {% else %}
+                                {% if activity["moving_time"] >= 600 %}
+                                <p class="h4"><b>Time:</b> {{ "%02d:%02d" % ((activity["moving_time"]%3600)//60,
+                                    (activity["moving_time"]%3600)%60)
+                                    }}
+                                </p>
+                                {% else %}
+                                <p class="h4"><b>Time:</b> {{ "%d:%02d" % ((activity["moving_time"]%3600)//60,
+                                    (activity["moving_time"]%3600)%60) }}
+                                </p>
+                                {% endif %}
+                                {% endif %}
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="row mt-4 mb-5 px-5">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-4 mb-4 mb-md-0">
+                                {% if activity["distance"] != 0 %}
+                                <p class="h4"><b>Distance:</b> {{ (activity["distance"]*0.000621371192)|round(2,
+                                    'common') }} mi</p>
+                                {% else %}
+                                <p class="h4"><b>Distance:</b> 0.00 mi</p> <td></td>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <p class="h4"><b>Calories:</b> {{ calories }}</p>
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="py-5">
+                            <a class="text-reset" target="_blank" href="https://strava.com/activities/{{id}}">View activity on Strava <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

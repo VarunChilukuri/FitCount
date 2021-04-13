@@ -1,0 +1,160 @@
+*{
+    font-family: 'Raleway', sans-serif;
+    line-height: 1.6;
+    color: white;
+}
+
+body{
+    background:#1b203d !important;
+ }
+ 
+ table.blueTable {
+    border: 0px solid #2A2B4A;
+    background-color: #2A2B4A;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+  }
+  table.blueTable td, table.blueTable th {
+    border-bottom: thin solid rgba(170,170,170, 0.1);
+    padding: 3px 2px;
+  }
+  table.blueTable tbody td {
+    font-size: 13px;
+    color: #FFFFFF;
+  }
+  table.blueTable thead {
+    background: #252645;
+  }
+  table.blueTable thead th {
+    font-size: 10px;
+    font-weight: bold;
+    color: rgb(173, 173, 173);
+  }
+  table.blueTable tfoot td {
+    font-size: 14px;
+  }
+  table.blueTable tfoot .links {
+    text-align: right;
+  }
+  table.blueTable tfoot .links a{
+    display: inline-block;
+    background: #1C6EA4;
+    color: #FFFFFF;
+    padding: 2px 8px;
+    border-radius: 5px;
+  }
+  table.blueTable tr:hover {
+      background-color: #34365D;
+}
+
+ .box {
+    background:#2a2b4a;
+    border-radius: 8px;
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom:100%;
+ }
+
+ .box2{
+    background:#2a2b4a;
+    border-radius: 8px;
+    position: relative;
+    width: 100%;
+ }
+
+ .box3 {
+    background:#2a2b4a;
+    border-radius: 8px;
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom:97%;
+ }
+
+ .box4 {
+    background:#2a2b4a;
+    border-radius: 8px;
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom:97.5%;
+    
+ }
+
+ .box5 {
+  background:#2a2b4a;
+  border-radius: 8px;
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+#title
+{
+    font-weight: 600;
+}
+
+ .col-lg-2, .col-md-3, .col-xs-6{
+     margin-top: 30px !important;
+ }
+
+ button{
+    background-color: #29a6d9 !important;
+    background-image: none;
+    border: #29a6d9 !important;
+}
+
+button:hover{
+    background-color: #249DCD !important;
+}
+
+#cumulative{
+    color: #ffc933;
+    padding-top:35%;
+}
+
+#cumulative2{
+    color: #ffc933;
+    padding-top: 25%;
+}
+
+
+#workout_spacing{
+    line-height: 0.8;
+}
+
+#map{
+  border: white 5px;
+}
+
+/*navbar code*/
+.dropdown-menu{
+  background-color: #2a2b4a !important;
+  color: white !important;
+}
+
+.dropdown-item{
+  color: white !important;
+}
+
+.dropdown-item:hover{
+  background-color: #34365D !important;
+  color: white !important;
+}
+
+.absolute-center {
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.text-center{
+  text-align: center;
+}
+
+#small-line{
+  line-height: 0.8;
+}

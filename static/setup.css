@@ -1,0 +1,53 @@
+*{
+    font-family: 'Raleway', sans-serif;
+    line-height: 1.6;
+    color: white;
+}
+
+body{
+    background-color: #1b203d !important;
+}
+
+#title
+{
+    font-weight: 600;
+}
+
+.join_button{
+    background: #fb5607;
+}
+
+.error-page{
+    padding-top:8%;
+}
+
+.error-mobile-margin{
+    margin-top: 35%;
+}
+
+.text-muted-custom{
+    color: rgb(173, 173, 173);
+}
+
+.url_warning
+{
+    color: red import !important;
+}
+
+.dropdown-menu{
+    background-color: #2a2b4a !important;
+    color: white !important;
+  }
+  
+  .dropdown-item{
+    color: white !important;
+  }
+  
+  .dropdown-item:hover{
+    background-color: #34365D !important;
+    color: white !important;
+  }
+
+#setup_telegram_button{
+    border-color: #29a6d9;
+}

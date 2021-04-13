@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <!--https://coolors.co/ffbe0b-fb5607-ff006e-8338ec-3a86ff-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../static/dashboard.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/e397881447.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Activities</title>
+</head>
+
+<body>
+    <nav class="mt-2 navbar navbar-fixed-top navbar-dark">
+        <a class="navbar-brand font-weight-bolder" href="#">
+            <img src="../static/logo.PNG" width="50"
+                height="50" class="align-center mb-1 font-weight-bolder h2" alt="">
+            FITCOUNT
+        </a>
+        <img src={{ profile_medium }} width="30" height="30"
+        class="mr-1 mt-2 rounded-circle ml-auto text-dark font-weight-bolder h2" alt="">
+    <div class="dropdown pr-2 ml-n2">
+        <a class="btn dropdown-toggle" data-toggle="dropdown">
+            {{name}}
+        </a>
+        <ul class="dropdown-menu">
+            <a class="dropdown-item" href="/dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
+            <a class="dropdown-item" href="/activities/all"><i class="fas fa-list-ul"></i> Activities</a>
+            <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+        </ul>
+    </div>
+    </nav>
+
+    <div>
+        <div class="container">
+            <h3 id="title" class="mb-4 ml-2">Workouts</h3>
+            <div class="row mb-5">
+                <div class="col-md-12 mb-2 mb-md-0">
+                    <div class="box2 h-25">
+                        <div>
+                            <table class="blueTable pl-4">
+                                <thead>
+                                    <tr>
+                                        <th class="py-2 text-uppercase">Date</th>
+                                        <th class="text-uppercase" scope="col">Type</th>
+                                        <th class="text-uppercase" scope="col">Name</th>
+                                        <th class="text-uppercase" scope="col">Time</th>
+                                        <th scope="col">DISTANCE (mi)</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for k in activities %}
+                                    <tr>
+                                        <td class="py-3">{{ "{}/{}/{}".format(k["start_date"][5:7],
+                                            k["start_date"][8:10],
+                                            k["start_date"][2:4]) }}</td>
+
+                                        {% if k["type"] == "Ride" %}
+                                        <td><i class="fas fa-biking fa-lg"></i></td>
+                                        {% elif k["type"] == "Run" %}
+                                        <td><i class="fas fa-running fa-lg"></i></td>
+                                        {% elif k["type"] == "Swim" %}
+                                        <td><i class="fas fa-swimmer fa-lg fa-flip-horizontal"></i></td>
+                                        {% elif k["type"] == "Walk" %}
+                                        <td><i class="fas fa-walking fa-lg"></i></td>
+                                        {% elif k["type"] == "Hike" %}
+                                        <td><i class="fas fa-hiking fa-lg"></i></td>
+                                        {% elif k["type"] == "IceSkate" %}
+                                        <td><i class="fas fa-skating fa-lg"></i></td>
+                                        {% elif k["type"] == "NordicSki" %}
+                                        <td><i class="fas fa-skiing-nordic fa-lg"></i></td>
+                                        {% elif k["type"] == "Snowboard" %}
+                                        <td><i class="fas fa-snowboarding fa-lg"></i></td>
+                                        {% elif k["type"] == "WeightTraining" %}
+                                        <td><i class="fas fa-dumbbell"></i></td>
+                                        {% elif k["type"] == "Wheelchair" %}
+                                        <td><i class="fas fa-wheelchair fa-lg"></i></td>
+                                        {% elif k["type"] == "Yoga" %}
+                                        <td><i class="fas fa-child fa-lg"></i></td>
+                                        {% elif k["type"] == "AlpineSki" %}
+                                        <td><i class="fas fa-skiing fa-lg"></i></td>
+                                        {% elif k["type"] == "BackcountrySki" %}
+                                        <td><i class="fas fa-skiing fa-lg"></i></td>
+                                        {% elif k["type"] == "Soccer" %}
+                                        <td><i class="fas fa-futbol fa-lg"></i></td>
+                                        {% elif k["type"] == "Workout" %}
+                                        <td><i class="fas fa-heartbeat fa-lg"></i></td>
+                                        {% else %}
+                                        <td>{{ k["type"] }}</td>
+                                        {% endif %}
+
+                                        <td>{{ k["name"] }}</td>
+
+                                        {% if k["moving_time"] >= 3600 %}
+                                        <td>{{ "%d:%02d:%02d" % (k["moving_time"]//3600, (k["moving_time"]%3600)//60,
+                                            (k["moving_time"]%3600)%60) }}</td>
+                                        {% else %}
+                                        {% if k["moving_time"] >= 600 %}
+                                        <td>{{ "%02d:%02d" % ((k["moving_time"]%3600)//60, (k["moving_time"]%3600)%60)
+                                            }}
+                                        </td>
+                                        {% else %}
+                                        <td>{{ "%d:%02d" % ((k["moving_time"]%3600)//60, (k["moving_time"]%3600)%60) }}
+                                        </td>
+                                        {% endif %}
+                                        {% endif %}
+
+                                        {% if k["distance"] != 0 %}
+                                        <td>{{ (k["distance"]*0.000621371192)|round(2, 'common') }}</td>
+                                        {% else %}
+                                        <td></td>
+                                        {% endif %}
+                                        <td><a href="/activities/{{k['id']}}" title="View activity"><i
+                                            class="mr-2 fas fa-chevron-right"></i></a>
+                                </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
