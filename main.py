@@ -221,7 +221,7 @@ def job():
                else:
                     bot.send_message(person.chat_id, "<u>" + date +"</u>\n"+ "No Activity - <b>" + person.first_name + " " + person.last_name + " did not exercise today.</b>", parse_mode="HTML")
 
-sched.add_job(job, 'cron', hour=11, minute=28)
+sched.add_job(job, 'cron', hour=11, minute=50)
 
 @app.route('/')
 def home():
